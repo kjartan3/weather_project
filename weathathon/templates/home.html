@@ -1,0 +1,19 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weathathon</title>
+        <link rel="stylesheet" href="{% static 'weather_app/css/styles.css' %}">
+    </head>
+</head>
+<body>
+    <h1>Weatha-thon</h1>
+    <button onclick="window.location.href='/compare/'">Compare Cities</button>
+    <button onclick="window.location.href='/save/'">Saved Cities</button>
+    <button onclick="window.location.href='/search/'">Search a City</button>
+</body>
+</html>

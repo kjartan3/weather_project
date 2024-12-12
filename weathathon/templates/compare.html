@@ -1,0 +1,25 @@
+{% comment %} <h1>Compare Two Cities Weather</h1>
+
+<a href="{% url 'home' %}">
+    <button>Go Back</button>
+</a> {% endcomment %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Weather</title>
+    <link rel="stylesheet" href="{% static 'weather_app/css/styles.css' %}">
+</head>
+<body>
+    <h1>Compare Weather</h1>
+
+
+    
+    <a href="{% url 'home' %}" class="go-back-btn">Go Back</a>
+</body>
+</html>
+
