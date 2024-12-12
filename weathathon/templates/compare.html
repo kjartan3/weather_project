@@ -17,7 +17,38 @@
 <body>
     <h1>Compare Weather</h1>
 
+    <div class="form-container">
+        <form method="POST">
+            {% csrf_token %}
+            <label for="city1">City 1:</label>
+            <input type="text" id="city1" name="city1" placeholder="Enter first city" required>
+            <br><br>
+            <label for="city2">City 2:</label>
+            <input type="text" id="city2" name="city2" placeholder="Enter second city" required>
+            <br><br>
+            <button type="submit">Compare</button>
+        </form>
+    </div>
 
+    {% if city1 and weather_city1 and city2 and weather_city2 %}
+        <div class="weather-container">
+            <div class="weather-card">
+                <h2>Weather in {{ city1 }}</h2>
+                <p><strong>Temperature:</strong> {{ weather_city1.temperature }}°C</p>
+                <p><strong>Humidity:</strong> {{ weather_city1.humidity }}%</p>
+                <p><strong>Wind Speed:</strong> {{ weather_city1.wind_speed }} km/h</p>
+                <p><strong>Description:</strong> {{ weather_city1.description }}</p>
+            </div>
+
+            <div class="weather-card">
+                <h2>Weather in {{ city2 }}</h2>
+                <p><strong>Temperature:</strong> {{ weather_city2.temperature }}°C</p>
+                <p><strong>Humidity:</strong> {{ weather_city2.humidity }}%</p>
+                <p><strong>Wind Speed:</strong> {{ weather_city2.wind_speed }} km/h</p>
+                <p><strong>Description:</strong> {{ weather_city2.description }}</p>
+            </div>
+        </div>
+    {% endif %}
     
     <a href="{% url 'home' %}" class="go-back-btn">Go Back</a>
 </body>
