@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import requests
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -51,11 +51,16 @@ def search_view(request):
     if request.method == 'POST':
         city = request.POST['city']
         weather_data = get_weather_data(city)
+        if weather_data is None:
+            return render(request, "search.html", {
+                "error": "City not found. Please try again."
+            })
         return render(request, "search.html", {
             "city": city,
             "weather_data": weather_data,
         })
     return render(request, "search.html")
+
 
 def get_weather_data(city_name):
     API_KEY = open("./.env", "r").read().strip()  # Gets the API key from the file
@@ -64,8 +69,10 @@ def get_weather_data(city_name):
     forecast_url = f'http://api.openweathermap.org/data/2.5/forecast?q={city_name}&appid={API_KEY}&units=metric'
 
     current_weather_response = requests.get(current_weather_url)
-    current_weather = current_weather_response.json()
+    if current_weather_response.status_code != 200:
+        return None  # Return None if the city is not found
 
+    current_weather = current_weather_response.json()
     forecast_response = requests.get(forecast_url)
     forecast_data = forecast_response.json()
 
@@ -78,7 +85,7 @@ def get_weather_data(city_name):
     }
 
     # Process the forecast data (next 5 days)
-    for day in forecast_data['list'][::8]:  # Get one forecast per day
+    for day in forecast_data['list'][::8][:5]:  # Get one forecast per day
         weather_data['forecast'].append({
             'date': day['dt_txt'],
             'temp': day['main']['temp'],
@@ -88,5 +95,6 @@ def get_weather_data(city_name):
         })
 
     return weather_data
+
 
 

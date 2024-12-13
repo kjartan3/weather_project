@@ -17,7 +17,7 @@
 <body>
     <h1>Compare Weather</h1>
 
-    <div class="form-container">
+    <div class="weather-container">
         <form method="POST">
             {% csrf_token %}
             <label for="city1">City 1:</label>
@@ -26,7 +26,7 @@
             <label for="city2">City 2:</label>
             <input type="text" id="city2" name="city2" placeholder="Enter second city" required>
             <br><br>
-            <button type="submit">Compare</button>
+            <button type="submit" class="submit-btn">Compare</button>
         </form>
     </div>
 
@@ -39,7 +39,8 @@
                 <p><strong>Wind Speed:</strong> {{ weather_city1.wind_speed }} km/h</p>
                 <p><strong>Description:</strong> {{ weather_city1.description }}</p>
             </div>
-
+            <br>
+            <br>
             <div class="weather-card">
                 <h2>Weather in {{ city2 }}</h2>
                 <p><strong>Temperature:</strong> {{ weather_city2.temperature }}°C</p>
@@ -50,6 +51,7 @@
         </div>
     {% endif %}
     
+    <br>
     <a href="{% url 'home' %}" class="go-back-btn">Go Back</a>
 </body>
 </html>
