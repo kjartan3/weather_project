@@ -29,7 +29,7 @@
         <div class="weather-container">
             <!-- Today's Weather Card -->
             <div class="weather-card">
-                <h2>Weather in {{ city }}</h2>
+                <h2>Today's Weather in {{ city }}</h2>
                 <p><strong>Temperature:</strong> {{ weather_data.temperature }}°C</p>
                 <p><strong>Humidity:</strong> {{ weather_data.humidity }}%</p>
                 <p><strong>Wind Speed:</strong> {{ weather_data.wind_speed }} km/h</p>
@@ -43,11 +43,11 @@
             <div class="forecast-container">
                 {% for day in weather_data.forecast %}
                     <div class="forecast-card">
-                        <p><strong>Date:</strong> {{ day.date|date:"Y-m-d" }}</p>
+                        <p><strong>Day:</strong> {{ day.day }}</p>
                         <p><strong>Temp:</strong> {{ day.temp }}°C</p>
                         <p><strong>Humidity:</strong> {{ day.humidity }}%</p>
                         <p><strong>Wind:</strong> {{ day.wind_speed }} km/h</p>
-                        <p><strong>{{ day.description }}</strong></p>
+                        <p>{{ day.description }}</p>
                     </div>
                 {% endfor %}
             </div>

@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import requests
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -61,19 +61,41 @@ def search_view(request):
         })
     return render(request, "search.html")
 
+def day_format(forecast_data):
+    forecast = []
+
+    today = datetime.now().date()
+
+    for index, day in enumerate(forecast_data['list'][::8][:5]):
+        forecast_date = today + timedelta(days=index + 1)
+
+        forecast.append({
+            'day': forecast_date.strftime('%A'),
+            'temp': day['main']['temp'],
+            'humidity': day['main']['humidity'],
+            'wind_speed': day['wind']['speed'],
+            'description': day['weather'][0]['description'],
+        })
+    return forecast
+
 
 def get_weather_data(city_name):
-    API_KEY = open("./.env", "r").read().strip()  # Gets the API key from the file
+   
+    API_KEY = open("./.env", "r").read().strip() 
 
     current_weather_url = f'http://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={API_KEY}&units=metric'
     forecast_url = f'http://api.openweathermap.org/data/2.5/forecast?q={city_name}&appid={API_KEY}&units=metric'
 
+    # fetch current weather data
     current_weather_response = requests.get(current_weather_url)
     if current_weather_response.status_code != 200:
-        return None  # Return None if the city is not found
+        return None 
 
     current_weather = current_weather_response.json()
     forecast_response = requests.get(forecast_url)
+    if forecast_response.status_code != 200:
+        return None
+
     forecast_data = forecast_response.json()
 
     weather_data = {
@@ -81,18 +103,8 @@ def get_weather_data(city_name):
         'humidity': current_weather['main']['humidity'],
         'wind_speed': current_weather['wind']['speed'],
         'description': current_weather['weather'][0]['description'],
-        'forecast': []  # 5-days of data
+        'forecast': day_format(forecast_data)  # extract and format forecast
     }
-
-    # Process the forecast data (next 5 days)
-    for day in forecast_data['list'][::8][:5]:  # Get one forecast per day
-        weather_data['forecast'].append({
-            'date': day['dt_txt'],
-            'temp': day['main']['temp'],
-            'humidity': day['main']['humidity'],
-            'wind_speed': day['wind']['speed'],
-            'description': day['weather'][0]['description'],
-        })
 
     return weather_data
 
