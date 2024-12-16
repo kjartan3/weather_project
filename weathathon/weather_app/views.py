@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 import requests
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import City
 
 # Create your views here.
@@ -35,17 +35,32 @@ def compare_view(request):
     return render(request, "compare.html")
 
 def save_view(request):
-    from .models import City  # This assumes a City model is defined
+    saved_cities = City.objects.all()
+    saved_weather = {city.name: get_weather_data(city.name) for city in saved_cities}
+    return render(request, "save.html", {"saved_weather": saved_weather})
 
+def handle_save_city(request):
+    """Handle saving a new city via AJAX."""
     if request.method == 'POST':
-        city_name = request.POST['city']
+        city_name = request.POST.get('city')
         city, created = City.objects.get_or_create(name=city_name)
         if created:
             city.save()
-    saved_cities = City.objects.all()
-    saved_weather = {city.name: get_weather_data(city.name) for city in saved_cities}
-
-    return render(request, "save.html", {"saved_weather": saved_weather})
+            weather_data = get_weather_data(city_name)
+            return JsonResponse({"status": "saved", "city": city_name, "weather": weather_data})
+        else:
+            return JsonResponse({"status": "exists", "city": city_name})
+        
+def handle_delete_city(request):
+    """Handle deleting a saved city via AJAX."""
+    if request.method == 'POST':
+        city_name = request.POST.get('city')
+        try:
+            city = City.objects.get(name=city_name)
+            city.delete()
+            return JsonResponse({"status": "deleted", "city": city_name})
+        except City.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "City does not exist"})
 
 def search_view(request):
     if request.method == 'POST':
@@ -77,7 +92,6 @@ def day_format(forecast_data):
             'description': day['weather'][0]['description'],
         })
     return forecast
-
 
 def get_weather_data(city_name):
    

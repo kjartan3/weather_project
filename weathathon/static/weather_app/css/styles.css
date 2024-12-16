@@ -68,6 +68,26 @@
     transform: translateY(-1px);
 }
 
+.delete-btn {
+    margin: 15px;
+    padding: 8px 16px;
+    background: #d9534f;
+    color: #fff;
+    text-decoration: none;
+    border-style: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    font-size: 14px;
+    max-width: 110px; 
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.delete-btn:hover {
+    background: #c9302c;
+    transform: translateY(-1px);
+}
+
 
 /* 5-Day Forecast Section */
 .forecast-header {
@@ -113,6 +133,17 @@
     }
 }
 
+/* .weather-card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.weather-card:hover {
+    transform: scale(1.05);
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+} */
 
 
 

@@ -9,10 +9,108 @@
     <link rel="stylesheet" href="{% static 'weather_app/css/styles.css' %}">
 </head>
 <body>
-    <h1>Saved Weather</h1>
+    <div class="weather-container">
+        <h1 style="text-align: center;">Saved Cities Weather</h1>
+        
+        <form id="save-city-form" style="text-align: center; margin-bottom: 20px;">
+            <input 
+                type="text" 
+                name="city" 
+                placeholder="Enter city name" 
+                required 
+                style="padding: 8px; width: 250px; border: 1px solid #aaa; border-radius: 5px;">
+            <button 
+                type="submit" 
+                class="submit-btn"
+            >Save City</button>
+        </form>
 
+        <div id="weather-container">
+            {% for city, weather in saved_weather.items %}
+                <div class="weather-card" id="city-{{ city }}">
+                    <h3>{{ city }}</h3>
+                    <hr>
+                    <p><strong>Temperature:</strong> {{ weather.temperature }} °C</p>
+                    <p><strong>Humidity:</strong> {{ weather.humidity }}%</p>
+                    <p><strong>Wind Speed:</strong> {{ weather.wind_speed }} m/s</p>
+                    <p><strong>Description:</strong> {{ weather.description }}</p>
+                    <button onclick="deleteCity('{{ city }}')" class="delete-btn">
+                        Delete
+                    </button>
+                </div>
+            {% empty %}
+                <p style="text-align: center; font-size: 16px; color: #555;">No saved cities yet. Save one to get started!</p>
+            {% endfor %}
+        </div>
 
+        <a href="{% url 'home' %}" class="go-back-btn">Go Back</a>
+    </div>
 
-    <a href="{% url 'home' %}" class="go-back-btn">Go Back</a>
+    <script>
+        document.getElementById("save-city-form").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+
+            const response = await fetch('/save/city/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            });
+
+            const result = await response.json();
+
+            if (result.status === "saved") {
+                alert(`Saved weather for ${result.city}`);
+                addCityToPage(result.city, result.weather);
+                this.reset();
+            } else if (result.status === "exists") {
+                alert(`City ${result.city} is already saved.`);
+            }
+        });
+
+        async function deleteCity(cityName) {
+            const response = await fetch('/delete/city/', {
+                method: 'POST',
+                body: new URLSearchParams({ city: cityName }),
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            });
+
+            const result = await response.json();
+
+            if (result.status === "deleted") {
+                alert(`Deleted city ${cityName}`);
+                removeCityFromPage(cityName);
+            } else {
+                alert(`Failed to delete city.`);
+            }
+        }
+
+        function addCityToPage(city, weather) {
+            const container = document.getElementById("weather-container");
+            const div = document.createElement("div");
+            div.classList.add('weather-card');
+            div.id = `city-${city}`;
+            div.innerHTML = `
+                <h3>${city}</h3>
+                <p><strong>Temperature:</strong> ${weather.temperature} °C</p>
+                <p><strong>Humidity:</strong> ${weather.humidity}%</p>
+                <p><strong>Wind Speed:</strong> ${weather.wind_speed} m/s</p>
+                <p><strong>Description:</strong> ${weather.description}</p>
+                <button onclick="deleteCity('${city}')" class="submit-btn" style="background: #e74c3c; border: none;">Delete</button>
+            `;
+            container.appendChild(div);
+        }
+
+        function removeCityFromPage(city) {
+            const div = document.getElementById(`city-${city}`);
+            if (div) {
+                div.remove();
+            }
+        }
+    </script>
 </body>
 </html>

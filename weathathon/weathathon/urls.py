@@ -16,12 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from weather_app.views import home_view, compare_view, save_view, search_view
+from weather_app.views import home_view, compare_view, save_view, search_view, handle_save_city, handle_delete_city
 
 urlpatterns = [
     path('', home_view, name='home'),
     path('compare/', compare_view, name='compare'),
     path('save/', save_view, name='save'),
+    path('save/city/', handle_save_city, name='handle_save_city'),
+    path('delete/city/', handle_delete_city, name='handle_delete_city'),
     path('search/', search_view, name='search'),
     path('admin/', admin.site.urls),
     
