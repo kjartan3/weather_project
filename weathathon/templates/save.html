@@ -29,7 +29,7 @@
             {% for city, weather in saved_weather.items %}
                 <div class="weather-card" id="city-{{ city }}">
                     <h3>{{ city }}</h3>
-                    <hr>
+                    <br>
                     <p><strong>Temperature:</strong> {{ weather.temperature }} °C</p>
                     <p><strong>Humidity:</strong> {{ weather.humidity }}%</p>
                     <p><strong>Wind Speed:</strong> {{ weather.wind_speed }} m/s</p>
@@ -38,11 +38,12 @@
                         Delete
                     </button>
                 </div>
+                <br>
             {% empty %}
                 <p style="text-align: center; font-size: 16px; color: #555;">No saved cities yet. Save one to get started!</p>
             {% endfor %}
         </div>
-
+        <br>
         <a href="{% url 'home' %}" class="go-back-btn">Go Back</a>
     </div>
 
@@ -96,14 +97,16 @@
             div.id = `city-${city}`;
             div.innerHTML = `
                 <h3>${city}</h3>
+                <br>
                 <p><strong>Temperature:</strong> ${weather.temperature} °C</p>
                 <p><strong>Humidity:</strong> ${weather.humidity}%</p>
                 <p><strong>Wind Speed:</strong> ${weather.wind_speed} m/s</p>
                 <p><strong>Description:</strong> ${weather.description}</p>
-                <button onclick="deleteCity('${city}')" class="submit-btn" style="background: #e74c3c; border: none;">Delete</button>
+                <button onclick="deleteCity('${city}')" class="delete-btn">Delete</button>
             `;
             container.appendChild(div);
-        }
+        } // continue working from here ^ fix delete button to stay red 
+          // and then maybe update 'Are you sure button' when adding or deleting city
 
         function removeCityFromPage(city) {
             const div = document.getElementById(`city-${city}`);
