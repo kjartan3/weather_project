@@ -15,32 +15,31 @@
     <link rel="stylesheet" href="{% static 'weather_app/css/styles.css' %}">
 </head>
 <body>
-    <h1 style="text-align: center;">Compare Weather</h1>
-
-    <div class="weather-container" id="save-city-form" style="text-align: center; margin-bottom: 20px;">
-        <form method="POST">
-            {% csrf_token %}
-            <label for="city1">City 1:</label>
-            <input 
-            type="text" 
-            id="city1" 
-            name="city1" 
-            placeholder="Enter first city" 
-            style="padding: 8px; width: 200px; border: 1px solid #aaa; border-radius: 5px;" 
-            required>
-            <br><br>
-            <label for="city2">City 2:</label>
-            <input 
-            type="text" 
-            id="city2" 
-            name="city2" 
-            placeholder="Enter second city" 
-            style="padding: 8px; width: 200px; border: 1px solid #aaa; border-radius: 5px;" 
-            required>
-            <br><br>
-            <button type="submit" class="submit-btn">Compare</button>
-        </form>
-    </div>
+    <header class="header-container">
+        <h1 style="text-align: center; position: relative; top: 8px;">Compare Weather</h1>
+        <div class="weather-container"id="save-city-form" style="text-align: center; margin-bottom: 5px;">
+            <form method="POST">
+                {% csrf_token %}
+                <input 
+                type="text" 
+                id="city1" 
+                name="city1" 
+                placeholder="Enter first city" 
+                style="padding: 8px; width: 250px; border: 1px solid #aaa; border-radius: 5px;" 
+                required>
+                <br><br>
+                <input 
+                type="text" 
+                id="city2" 
+                name="city2" 
+                placeholder="Enter second city" 
+                style="padding: 8px; width: 250px; border: 1px solid #aaa; border-radius: 5px;" 
+                required>
+                <br><br>
+                <button type="submit" class="submit-btn">Compare</button>
+            </form>
+        </div>
+    </header>
 
     {% if city1 and weather_city1 and city2 and weather_city2 %}
         <div class="weather-container">

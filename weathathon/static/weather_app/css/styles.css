@@ -1,22 +1,32 @@
-/* General Reset */
+/* General */
 * {
     margin: 8px;
     padding: 1px;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
-    
 }
 
-/* Weather Container */
+body {
+    background: #f4f4f4;
+    color: #3a3a3a;
+}
+
 .weather-container {
     max-width: 1200px;
     margin: 20px auto;
     padding: 10px;
 }
 
+.button-container {
+    display: flex;
+    justify-content: center; 
+    gap: 80px;
+    margin-top: 80px;
+}
+
 /* Today's Weather Section */
 .weather-card {
-    background: #f2f2f2;
+    background: #ffffff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -29,7 +39,7 @@
 .submit-btn {
     margin: 15px;
     padding: 8px 16px;
-    background: #1c8919;
+    background: #6cbbff;
     color: #fff;
     text-decoration: none;
     border-style: none;
@@ -37,13 +47,13 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     text-align: center;
     font-size: 14px;
-    max-width: 110px; /* Limits the width but allows it to adjust on smaller screens */
+    max-width: 110px;
     transition: background 0.3s ease, transform 0.2s ease;
     outline: none;
 }
 
 .submit-btn:hover {
-    background: #145a10;
+    background: #44a8ff;
     transform: translateY(-1px);
 }
 
@@ -51,7 +61,7 @@
     display: block;
     margin: 15px auto;
     padding: 8px 16px;
-    background: #1c8919;
+    background: #6cbbff;
     color: #fff;
     text-decoration: none;
     border-style: none;
@@ -64,9 +74,11 @@
 }
 
 .go-back-btn:hover {
-    background: #145a10;
+    background: #44a8ff;
     transform: translateY(-1px);
 }
+
+/* Delete button */
 
 .delete-btn {
     margin: 15px;
@@ -87,6 +99,8 @@
     background: #c9302c;
     transform: translateY(-1px);
 }
+
+/* Input form */
 
 .input-form {
     padding: 8px; 
@@ -120,14 +134,13 @@
     flex: 0 0 auto;
     width: 200px;
     padding: 15px;
-    background: #f2f2f2;
+    background: #ffffff;
     text-align: center;
     border: 1px solid #aaa;
     border-radius: 8px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .forecast-card {
         width: 120px;
@@ -140,6 +153,71 @@
     }
 }
 
+/* Homepage Header Section */
+.header-container {
+    background: linear-gradient(to right, #158dce, #4facfe);
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 4px solid #1e81b0;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.main-title {
+    font-size: 36px;
+    letter-spacing: 3px;
+    margin-bottom: 5px;
+}
+
+.tagline {
+    font-size: 16px;
+    font-weight: 300;
+}
+
+/* Individual Cards */
+.feature-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Add space between items in the vertical layout */
+    max-width: 1200px;
+}
+
+.feature-card {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    width: 440px;
+}
+
+.feature-description {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #3a3a3a;
+}
+
+@media (max-width: 768px) {
+    .feature-card {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 28px;
+    }
+
+    .tagline {
+        font-size: 14px;
+    }
+}
+
+  
+
 /* .weather-card {
     transition: transform 0.2s ease-in-out;
 }
@@ -151,60 +229,6 @@
 .submit-btn:hover {
     transform: translateY(-2px);
 } */
-
-/* .model-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-}
-
-/* Modal Content Box */
-.model-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    max-width: 400px;
-    width: 90%;
-}
-
-/* Buttons in Modal */
-.model-btn {
-    margin: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.model-btn.confirm {
-    background-color: #1c8919;
-    color: white;
-}
-
-.model-btn.cancel {
-    background-color: #aaa;
-    color: white;
-}
-
-.model-btn.delete {
-    background-color: #e74c3c;
-    color: white;
-}
-
-.model-btn:hover {
-    transform: translateY(-1px);
-} */
-
 
 
 

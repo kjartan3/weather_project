@@ -3,19 +3,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Weathathon</title>
-        <link rel="stylesheet" href="{% static 'weather_app/css/styles.css' %}">
-    </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weathathon</title>
+    <link rel="stylesheet" href="{% static 'weather_app/css/styles.css' %}">
 </head>
 <body>
-    <div class="weather-container">
-        <h1>Weatha-thon</h1>
-        <button onclick="window.location.href='/search/'" class="submit-btn">Search</button>
-        <button onclick="window.location.href='/save/'" class="submit-btn">Saved</button>
-        <button onclick="window.location.href='/compare/'" class="submit-btn">Compare</button> 
-    </div>
+    <!-- Main container -->
+    <header class="header-container">
+        <h1 class="main-title">Weatha-thon</h1>
+        <br>
+        <p class="tagline">Your one-stop weather companion</p>
+    </header>
+    <br>
+    <!-- Button Section -->
+    <main class="weather-container">
+        <div class="feature-container">
+            <div class="feature-card">
+                <p class="feature-description">Search for a city's current weather report</p>
+                <button onclick="window.location.href='/search/'" class="submit-btn">Search</button>
+            </div>
+            <br>
+            <div class="feature-card">
+                <p class="feature-description">Save cities to view your saved cities list</p>
+                <button onclick="window.location.href='/save/'" class="submit-btn">Saved</button>
+            </div>
+            <br>
+            <div class="feature-card">
+                <p class="feature-description">Compare two different cities' current weather reports</p>
+                <button onclick="window.location.href='/compare/'" class="submit-btn">Compare</button>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
+

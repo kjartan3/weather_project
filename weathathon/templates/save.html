@@ -9,22 +9,25 @@
     <link rel="stylesheet" href="{% static 'weather_app/css/styles.css' %}">
 </head>
 <body>
-    <div class="weather-container">
-        <h1 style="text-align: center;">Saved Cities Weather</h1>
-        
-        <form id="save-city-form" style="text-align: center; margin-bottom: 20px;">
-            <input 
-                type="text" 
-                name="city" 
-                placeholder="Enter city name" 
-                required 
-                style="padding: 8px; width: 250px; border: 1px solid #aaa; border-radius: 5px;">
-            <button 
-                type="submit" 
-                class="submit-btn"
-            >Save City</button>
-        </form>
-
+    <header class="header-container">
+        <div>
+            <h1 style="text-align: center;">Saved Cities Weather</h1>
+            <br>
+            <form id="save-city-form" style="text-align: center; margin-bottom: 10px;">
+                <input 
+                    type="text" 
+                    name="city" 
+                    placeholder="Enter city name" 
+                    required 
+                    style="padding: 8px; width: 250px; border: 1px solid #aaa; border-radius: 5px;">
+                <button 
+                    type="submit" 
+                    class="submit-btn"
+                >Save City</button>
+            </form>
+        </div>
+    </header>
+    <br>
         <div id="weather-container">
             {% for city, weather in saved_weather.items %}
                 <div class="weather-card" id="city-{{ city }}">
