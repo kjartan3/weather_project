@@ -117,7 +117,7 @@ def get_weather_data(city_name):
         'humidity': current_weather['main']['humidity'],
         'wind_speed': current_weather['wind']['speed'],
         'description': current_weather['weather'][0]['description'],
-        'forecast': day_format(forecast_data)  # extract and format forecast
+        'forecast': day_format(forecast_data)  # get and format forecast
     }
 
     return weather_data
