@@ -43,7 +43,7 @@
                 <br>
                 <p><strong>Temperature:</strong> {{ weather_data.temperature }}°C</p>
                 <p><strong>Humidity:</strong> {{ weather_data.humidity }}%</p>
-                <p><strong>Wind Speed:</strong> {{ weather_data.wind_speed }} km/h</p>
+                <p><strong>Wind Speed:</strong> {{ weather_data.wind_speed }} mph</p>
                 <p>{{ weather_data.description }}</p>
             </div>
         
@@ -57,7 +57,7 @@
                         <p><strong>Day:</strong> {{ day.day }}</p>
                         <p><strong>Temp:</strong> {{ day.temp }}°C</p>
                         <p><strong>Humidity:</strong> {{ day.humidity }}%</p>
-                        <p><strong>Wind:</strong> {{ day.wind_speed }} km/h</p>
+                        <p><strong>Wind:</strong> {{ day.wind_speed }} mph</p>
                         <p>{{ day.description }}</p>
                     </div>
                 {% endfor %}
